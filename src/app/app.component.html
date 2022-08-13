@@ -1,0 +1,93 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2 class="mb-3">User Form</h2>
+      <div class="card">
+        <div class="card-body">
+          <!-- <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="signUpForm"> -->
+        <form #form="ngForm" (ngSubmit)="onSubmit()" class="signUpForm">
+          <div ngModelGroup="userDetails" #userDetails="ngModelGroup">
+            <div class="form-group mb-4">
+              <label for="username">Username</label>
+              <input type="text" name="username" id="username" ngModel class="form-control" #username="ngModel" required>
+              <!-- <span class="errMsg" *ngIf="username.touched && username.invalid">Please Enter Valid username</span> -->
+            </div>
+  
+            <div class="form-group mb-4">
+              <button type="button" class="btn btn-info" (click)="onSuggestName()">Suggest Username</button>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="email">Email</label>
+              <input type="text" name="email" id="email" ngModel class="form-control" email #email="ngModel" required>
+              <!-- <span class="errMsg" *ngIf="email.touched && email.invalid">Please enter valid email address</span> -->
+            </div>
+          </div>
+          <p class="errMsg" *ngIf="userDetails.invalid && userDetails.touched">Username or email is invalid...!!!</p>
+  
+          <div class="form-group">
+            <p>Genders</p>
+            <!-- <label class="mr-5">
+              <input type="radio" name="gender" ngModel value="female"> Female
+            </label>
+            <label>
+              <input type="radio" name="gender" ngModel value="male"> Male
+            </label> -->
+            <div *ngFor="let gender of genders">
+              <label>
+                <input type="radio" name="gender" ngModel [value]="gender"> &nbsp; {{gender}}
+              </label>
+            </div>
+          </div>
+  
+          <div class="form-group mb-4">
+            <label for="secret">secret</label>
+            <select name="secret" id="secret" ngModel class="form-control" #secret="ngModel" required>
+              <option value="">Select your question..</option>
+              <option value="player">Your favourite player</option>
+              <option value="book">Your favourite Book</option>
+              <option value="roleModel">Your role model</option>
+            </select>
+            <span class="errMsg" *ngIf="secret.touched && secret.invalid">Please select your question...!!</span>
+          </div>
+  
+          <div class="form-group mb-2">
+            <label for="answer">Answer</label>
+            <textarea name="answer" class="form-control" id="answer" [(ngModel)]="ans" rows="2"></textarea>
+          </div>
+          <p class="alert alert-success" *ngIf="ans">Question's answer is : {{ans}} </p>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+            <button type="button" class="btn btn-success mx-3" (click)="onSetValue()">Set Default Values</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-sm-6">
+      <h2 class="mb-2">User Information</h2>
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <th>Sr. No.</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Question</th>
+              <th>Answer</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of userArray; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{user.userDetails.username}}</td>
+                <td>{{user.userDetails.email}}</td>
+                <td>{{user.secret}}</td>
+                <td>{{user.answer}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
